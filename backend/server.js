@@ -32,9 +32,9 @@ app.use(helmet());
 // --- UPDATED CORS CONFIGURATION ---
 app.use(cors({ 
   origin: [
-    "http://localhost:5173", // Keeps local development working
-    "https://used-book-selling-and-buying-websit.vercel.app/", // <--- REPLACE THIS WITH YOUR ACTUAL VERCEL URL
-    process.env.CLIENT_URL // Fallback for Render environment variable
+    "http://localhost:5173",
+    "https://used-book-selling-and-buying-websit.vercel.app", // Trailing slash removed here
+    process.env.CLIENT_URL 
   ].filter(Boolean), 
   credentials: true 
 }));
