@@ -17,7 +17,6 @@ const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
-
 const paymentRoutes = require('./routes/paymentRoutes');
 
 connectDB();
@@ -26,13 +25,22 @@ const app = express();
 
 // Tell Express it is running behind Render's load balancer
 app.set('trust proxy', 1);
+
 // Security & core middleware
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL || '*', credentials: true }));
 
+// --- UPDATED CORS CONFIGURATION ---
+app.use(cors({ 
+  origin: [
+    "http://localhost:5173", // Keeps local development working
+    "https://used-book-selling-and-buying-websit.vercel.app/", // <--- REPLACE THIS WITH YOUR ACTUAL VERCEL URL
+    process.env.CLIENT_URL // Fallback for Render environment variable
+  ].filter(Boolean), 
+  credentials: true 
+}));
+// ----------------------------------
 
 app.use('/api/payments/razorpay/webhook', express.raw({ type: 'application/json' }));
-
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -51,7 +59,6 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/payments', paymentRoutes);
-
 
 // Error handling
 app.use(notFound);
