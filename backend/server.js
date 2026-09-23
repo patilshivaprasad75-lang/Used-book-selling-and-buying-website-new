@@ -33,7 +33,7 @@ app.use(helmet());
 app.use(cors({ 
   origin: [
     "http://localhost:5173",
-    "https://used-book-selling-and-buying-websit.vercel.app", // Trailing slash removed here
+    "https://used-book-selling-and-buying-websit-lemon.vercel.app", // Added the -lemon suffix
     process.env.CLIENT_URL 
   ].filter(Boolean), 
   credentials: true 
