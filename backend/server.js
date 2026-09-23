@@ -17,25 +17,23 @@ const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
-<<<<<<< HEAD
+
 const paymentRoutes = require('./routes/paymentRoutes');
-=======
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
 
 connectDB();
 
 const app = express();
 
+// Tell Express it is running behind Render's load balancer
+app.set('trust proxy', 1);
 // Security & core middleware
 app.use(helmet());
 app.use(cors({ origin: process.env.CLIENT_URL || '*', credentials: true }));
-<<<<<<< HEAD
 
 
 app.use('/api/payments/razorpay/webhook', express.raw({ type: 'application/json' }));
 
-=======
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV !== 'production') app.use(morgan('dev'));
@@ -52,14 +50,15 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/notifications', notificationRoutes);
-<<<<<<< HEAD
 app.use('/api/payments', paymentRoutes);
-=======
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
+
 
 // Error handling
 app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`));
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server successfully started in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+});
