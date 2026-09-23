@@ -47,22 +47,20 @@ const orderSchema = new mongoose.Schema(
       country: String,
       phone: String,
     },
-<<<<<<< HEAD
+
     paymentMethod: { type: String, enum: ['COD', 'Card', 'UPI'], default: 'COD' },
-=======
+
     paymentMethod: { type: String, enum: ['COD', 'Card'], default: 'COD' },
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
     paymentResult: {
       id: String,
       status: String,
       updateTime: String,
     },
-<<<<<<< HEAD
+
     // Set once a Razorpay order is created for this order, so we can match
     // the payment back to it and verify the signature on completion.
     razorpayOrderId: String,
-=======
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
+
     itemsTotal: { type: Number, required: true },
     shippingFee: { type: Number, default: 0 },
     totalAmount: { type: Number, required: true },
