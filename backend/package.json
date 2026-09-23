@@ -22,12 +22,8 @@
     "mongoose": "^8.4.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-<<<<<<< HEAD
     "nodemailer": "^6.9.13",
     "razorpay": "^2.9.4"
-=======
-    "nodemailer": "^6.9.13"
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
