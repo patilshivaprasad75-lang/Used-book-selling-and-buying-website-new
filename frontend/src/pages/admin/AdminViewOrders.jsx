@@ -1,9 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
-<<<<<<< HEAD
+
 import { getAllOrders, adminApproveOrder, updateTracking } from "../../api/orders";
-=======
+
 import { getAllOrders, adminApproveOrder } from "../../api/orders";
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
 import { statusSlug } from "../../utils/orderStatus";
 import { useToast } from "../../context/ToastContext";
 import Loader from "../../components/Loader";
@@ -22,26 +21,15 @@ const FILTERS = [
   "Returned",
 ];
 
-<<<<<<< HEAD
-// Stages the admin can move an order through once it's past seller/admin
-// approval. Matches the backend's SHIPPING_STAGE_ORDER, which also enforces
-// that a stage can't move backwards.
-const SHIP_STAGES = ["Processing", "Shipped", "Out for Delivery", "Delivered"];
-// Statuses where the shipment-tracking form should be shown at all.
-const TRACKABLE_STATUSES = ["Admin Approved", "Processing", "Shipped", "Out for Delivery"];
-
-=======
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
 export default function AdminViewOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("All");
   const [expanded, setExpanded] = useState(null);
   const [busy, setBusy] = useState(null);
-<<<<<<< HEAD
+
   const [trackingForm, setTrackingForm] = useState({ status: "", location: "", note: "", courier: "" });
-=======
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
+
   const toast = useToast();
 
   const load = async () => {
@@ -75,7 +63,6 @@ export default function AdminViewOrders() {
     }
   };
 
-<<<<<<< HEAD
   const handleTrackingSubmit = async (orderId, e) => {
     e.preventDefault();
     setBusy(`tracking-${orderId}`);
@@ -93,8 +80,7 @@ export default function AdminViewOrders() {
     }
   };
 
-=======
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
+
   if (loading) return <Loader label="Loading orders..." />;
 
   return (
@@ -194,7 +180,7 @@ export default function AdminViewOrders() {
                           </p>
                         )}
 
-<<<<<<< HEAD
+
                         {TRACKABLE_STATUSES.includes(o.orderStatus) && (
                           <>
                             <strong>Update Order Status</strong>
@@ -233,8 +219,7 @@ export default function AdminViewOrders() {
                           </>
                         )}
 
-=======
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
+
                         {o.statusHistory?.length > 0 && (
                           <>
                             <strong>Timeline</strong>
