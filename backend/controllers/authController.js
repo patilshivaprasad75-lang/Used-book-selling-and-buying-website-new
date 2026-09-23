@@ -5,13 +5,10 @@ const User = require('../models/User');
 const generateToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE || '7d' });
 
-<<<<<<< HEAD
-
-=======
 // @desc    Register new user
 // @route   POST /api/auth/register
 // @access  Public
->>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
+
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, phone, role } = req.body;
 
