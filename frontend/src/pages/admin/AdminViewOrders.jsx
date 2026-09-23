@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState } from "react";
 
 import { getAllOrders, adminApproveOrder, updateTracking } from "../../api/orders";
 
-import { getAllOrders, adminApproveOrder } from "../../api/orders";
 import { statusSlug } from "../../utils/orderStatus";
 import { useToast } from "../../context/ToastContext";
 import Loader from "../../components/Loader";

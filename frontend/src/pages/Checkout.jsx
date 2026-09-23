@@ -4,12 +4,9 @@ import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import { createOrder } from "../api/orders";
-
 import { createRazorpayOrder, verifyRazorpayPayment } from "../api/payments";
 import { bookImageUrl } from "../api/books";
 import { loadRazorpayScript } from "../utils/loadRazorpay";
-import { bookImageUrl } from "../api/books";
-
 
 export default function Checkout() {
   const { items, itemsTotal, clear } = useCart();
@@ -28,13 +25,13 @@ export default function Checkout() {
     pincode: "",
     country: "India",
   });
+  
   const [paymentMethod, setPaymentMethod] = useState("COD");
 
   const shipping = itemsTotal > 500 || itemsTotal === 0 ? 0 : 40;
   const grandTotal = itemsTotal + shipping;
 
   const handleChange = (e) => setAddress((a) => ({ ...a, [e.target.name]: e.target.value }));
-
 
   // Opens the Razorpay checkout modal (restricted to UPI) for an
   // already-created order, and verifies the payment signature on success.
@@ -102,7 +99,6 @@ export default function Checkout() {
     }
   };
 
-
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
     setError("");
@@ -118,7 +114,6 @@ export default function Checkout() {
         paymentMethod,
       };
       const res = await createOrder(payload);
-
       const order = res.data;
       await clear();
 
@@ -131,14 +126,7 @@ export default function Checkout() {
       navigate(`/dashboard/orders`, { state: { newOrderId: order._id } });
     } catch (err) {
       setError(err.message || "Could not place order. Please try again.");
-
-      await clear();
-      toast.success("Order placed successfully!");
-      navigate(`/dashboard/orders`, { state: { newOrderId: res.data._id } });
-    } catch (err) {
-      setError(err.message || "Could not place order. Please try again.");
     } finally {
-
       setPlacing(false);
     }
   };
@@ -188,11 +176,7 @@ export default function Checkout() {
 
           <h2>Payment Method</h2>
           <div className="payment-method">
-
             {["COD", "UPI"].map((m) => (
-
-            {["COD", "Card"].map((m) => (
-
               <label key={m}>
                 <input
                   type="radio"
@@ -212,9 +196,6 @@ export default function Checkout() {
                 ? "Opening UPI payment..."
                 : "Placing Order..."
               : `Place Order - ₹${grandTotal}`}
-
-            {placing ? "Placing Order..." : `Place Order - ₹${grandTotal}`}
-
           </button>
         </div>
 
