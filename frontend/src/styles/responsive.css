@@ -1,0 +1,274 @@
+/* =========================================================
+   RESPONSIVE OVERRIDES
+   Loaded last so it wins over legacy.css / enhancements.css.
+   Fills gaps left by the existing breakpoints and adds proper
+   small-phone (<=480px) support across the whole app.
+   ========================================================= */
+
+/* ---------- Global mobile hygiene ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent any single element from forcing horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* ---------- Navbar ---------- */
+/* Auth buttons live twice: a desktop row and mobile-menu items.
+   Toggle which one is visible based on width so the top bar
+   never overflows on small phones. */
+.nav-buttons-desktop {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.mobile-logout-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: #fca5a5;
+  font-size: 1rem;
+  padding: 4px 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: 14px 5%;
+  }
+  .nav-buttons-desktop {
+    display: none;
+  }
+  .nav-buttons {
+    gap: 14px;
+  }
+  .nav-links {
+    background: #111827;
+    padding: 14px 16px !important;
+    border-radius: 0 0 12px 12px;
+  }
+  .nav-links a {
+    display: block;
+    padding: 10px 4px;
+  }
+}
+
+/* ---------- Section padding: 80px 8% is too heavy on phones ---------- */
+@media (max-width: 600px) {
+  .hero,
+  .search-section,
+  .featured-books,
+  .sell-book-section,
+  .checkout-section,
+  .dashboard-section,
+  .content-section,
+  .cart-section,
+  .about-section {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+  .search-section,
+  .featured-books,
+  .sell-book-section,
+  .checkout-section,
+  .dashboard-section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  .hero {
+    min-height: 80vh;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+/* ---------- Fluid hero / heading type ---------- */
+.hero h1 {
+  font-size: clamp(2rem, 8vw, 4rem);
+}
+.hero p {
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+}
+.search-section h2,
+.featured-books h2 {
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+}
+.content-section h1,
+.checkout-section h1,
+.dashboard-section h1 {
+  font-size: clamp(1.6rem, 6vw, 2.5rem);
+}
+
+@media (max-width: 480px) {
+  .hero-buttons {
+    width: 100%;
+  }
+  .hero-buttons .btn {
+    width: 100%;
+    text-align: center;
+  }
+  .search-box {
+    flex-direction: column;
+  }
+  .search-box input {
+    width: 100%;
+  }
+  .search-box button {
+    width: 100%;
+  }
+}
+
+/* ---------- Book grid tightens up on very small screens ---------- */
+@media (max-width: 480px) {
+  .book-container,
+  .wishlist-grid,
+  .listings-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* ---------- Forms & buttons: comfortable touch targets ---------- */
+input,
+select,
+textarea,
+button,
+.btn {
+  font-size: 16px; /* prevents iOS auto-zoom on focus */
+}
+
+@media (max-width: 600px) {
+  .btn {
+    padding: 12px 18px;
+  }
+  .login-container,
+  .register-container,
+  .sell-book-container {
+    padding: 28px 20px;
+  }
+}
+
+/* ---------- Modals ---------- */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 92%;
+    margin: 12% auto;
+    padding: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+/* ---------- Tables: horizontal scroll + tighter cells ---------- */
+@media (max-width: 600px) {
+  .admin-table-container,
+  .table-wrap {
+    padding: 14px;
+  }
+  .admin-table th,
+  .admin-table td,
+  .data-table th,
+  .data-table td {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  /* Expanded "Manage/Details" panels (order items, Confirm/Reject,
+     Approve/Reject, and the tracking-update form) must be allowed to
+     wrap normally. Without this, `white-space: nowrap` above pushes
+     those buttons off the right edge of the horizontally-scrolling
+     table, making them invisible/unreachable on mobile. */
+  .data-table td.order-detail-cell {
+    white-space: normal;
+  }
+  .data-table td.order-detail-cell * {
+    white-space: normal;
+  }
+  .admin-filters {
+    flex-direction: column;
+  }
+  .admin-filters input,
+  .admin-filters select {
+    width: 100%;
+    min-width: 0;
+  }
+  .admin-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .admin-actions .btn {
+    text-align: center;
+  }
+}
+
+/* ---------- Dashboard layout on phones ---------- */
+@media (max-width: 600px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr !important;
+  }
+  .quick-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Footer ---------- */
+@media (max-width: 600px) {
+  footer {
+    padding: 32px 20px;
+  }
+  .footer-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-social {
+    margin-top: 12px;
+  }
+}
+
+/* ---------- Chatbot widget: keep it usable on small phones ---------- */
+@media (max-width: 480px) {
+  .chatbot-root {
+    right: 12px;
+    bottom: 12px;
+  }
+  .chatbot-window {
+    width: 90vw;
+    max-width: 340px;
+    height: 65vh;
+    max-height: 480px;
+  }
+  .chatbot-fab {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+/* ---------- BookDetails / Cart / Checkout stacking on phones ---------- */
+@media (max-width: 600px) {
+  .details-container,
+  .cart-container,
+  .checkout-container,
+  .contact-container,
+  .settings-container,
+  .profile-header,
+  .revenue-card,
+  .ticket-header {
+    gap: 20px;
+  }
+  .book-info h1 {
+    font-size: clamp(1.5rem, 7vw, 2rem) !important;
+  }
+}

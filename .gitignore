@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+.vscode
+node_modules/
+.env
+.env.*
+!.env.example
+backend/uploads/
+*.zip
+=======
+.vscode
+>>>>>>> b6933976fd1fff027adfd9ab68569efae267122a
