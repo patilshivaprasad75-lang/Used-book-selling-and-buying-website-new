@@ -1,4 +1,4 @@
-const RAW_BASE = import.meta.env.VITE_API_BASE_URL || "https://used-book-selling-and-buying-website.onrender.com";
+const RAW_BASE = import.meta.env.VITE_API_BASE_URL || "https://used-book-selling-and-buying-website-new.onrender.com";
 // Every route string in src/api/*.js already starts with "/api", so strip any
 // trailing slash and any trailing "/api" from the base URL to avoid "/api/api/...".
 export const API_BASE_URL = RAW_BASE.replace(/\/+$/, "").replace(/\/api$/, "");
