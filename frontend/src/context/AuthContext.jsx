@@ -27,6 +27,9 @@ export function AuthProvider({ children }) {
     let cancelled = false;
     async function verify() {
       if (!getToken()) {
+        // A stale "logged in" user without a token would make requests fail with
+        // "Not authorized, no token" - clear it so the user is asked to log in again.
+        persistUser(null);
         setLoading(false);
         return;
       }
@@ -46,6 +49,14 @@ export function AuthProvider({ children }) {
     return () => {
       cancelled = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Token rejected by the backend on any request -> log out locally.
+  useEffect(() => {
+    const onUnauthorized = () => persistUser(null);
+    window.addEventListener("auth:unauthorized", onUnauthorized);
+    return () => window.removeEventListener("auth:unauthorized", onUnauthorized);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

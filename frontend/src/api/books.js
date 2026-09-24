@@ -1,4 +1,4 @@
-import { api, API_BASE_URL, getToken } from "./client";
+import { api } from "./client";
 
 // GET /api/books?keyword=&category=&minPrice=&maxPrice=&condition=&sortBy=&page=&limit=
 export const getBooks = (params = {}) => {
@@ -15,22 +15,16 @@ export const getBookById = (id) => api.get(`/api/books/${id}`);
 export const getMyListings = () => api.get("/api/books/seller/my-listings");
 
 // POST /api/books (multipart, field name "images", up to 5)
-export const createBook = async (fields, imageFiles = []) => {
+export const createBook = (fields, imageFiles = []) => {
   const form = new FormData();
   Object.entries(fields).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") form.append(key, value);
   });
   imageFiles.forEach((file) => form.append("images", file));
 
-  const token = getToken();
-  const res = await fetch(`${API_BASE_URL}/api/books`, {
-    method: "POST",
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
-    body: form,
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.message || "Failed to create book listing");
-  return data;
+  // isForm: true -> no JSON Content-Type (the browser sets the multipart boundary),
+  // and the shared client still attaches the Authorization: Bearer <token> header.
+  return api.post("/api/books", form, { isForm: true });
 };
 
 // PUT /api/books/:id
