@@ -5,14 +5,14 @@ export const getBooks = (params = {}) => {
   const query = new URLSearchParams(
     Object.entries(params).filter(([, v]) => v !== undefined && v !== "" && v !== null)
   ).toString();
-  return api.get(`/books${query ? `?${query}` : ""}`);
+  return api.get(`/api/books${query ? `?${query}` : ""}`);
 };
 
 // GET /api/books/:id
-export const getBookById = (id) => api.get(`/books/${id}`);
+export const getBookById = (id) => api.get(`/api/books/${id}`);
 
 // GET /api/books/seller/my-listings
-export const getMyListings = () => api.get("/books/seller/my-listings");
+export const getMyListings = () => api.get("/api/books/seller/my-listings");
 
 // POST /api/books (multipart, field name "images", up to 5)
 export const createBook = async (fields, imageFiles = []) => {
@@ -23,7 +23,7 @@ export const createBook = async (fields, imageFiles = []) => {
   imageFiles.forEach((file) => form.append("images", file));
 
   const token = getToken();
-  const res = await fetch(`${API_BASE_URL}/books`, {
+  const res = await fetch(`${API_BASE_URL}/api/books`, {
     method: "POST",
     headers: token ? { Authorization: `Bearer ${token}` } : {},
     body: form,
@@ -34,16 +34,16 @@ export const createBook = async (fields, imageFiles = []) => {
 };
 
 // PUT /api/books/:id
-export const updateBook = (id, payload) => api.put(`/books/${id}`, payload);
+export const updateBook = (id, payload) => api.put(`/api/books/${id}`, payload);
 
 // DELETE /api/books/:id
-export const deleteBook = (id) => api.del(`/books/${id}`);
+export const deleteBook = (id) => api.del(`/api/books/${id}`);
 
 // POST /api/books/:bookId/reviews
-export const addReview = (bookId, payload) => api.post(`/books/${bookId}/reviews`, payload);
+export const addReview = (bookId, payload) => api.post(`/api/books/${bookId}/reviews`, payload);
 
 // GET /api/books/:bookId/reviews
-export const getBookReviews = (bookId) => api.get(`/books/${bookId}/reviews`);
+export const getBookReviews = (bookId) => api.get(`/api/books/${bookId}/reviews`);
 
 export const CATEGORIES = [
   "Fiction",

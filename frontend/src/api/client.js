@@ -1,6 +1,7 @@
-const RAW_BASE = import.meta.env.VITE_API_BASE_URL || "https://used-book-selling-and-buying-website.onrender.com/api";
-export const API_BASE_URL = RAW_BASE.replace(/\/$/, "");
-
+const RAW_BASE = import.meta.env.VITE_API_BASE_URL || "https://used-book-selling-and-buying-website.onrender.com";
+// Every route string in src/api/*.js already starts with "/api", so strip any
+// trailing slash and any trailing "/api" from the base URL to avoid "/api/api/...".
+export const API_BASE_URL = RAW_BASE.replace(/\/+$/, "").replace(/\/api$/, "");
 const TOKEN_KEY = "ob_auth_token";
 
 export function getToken() {

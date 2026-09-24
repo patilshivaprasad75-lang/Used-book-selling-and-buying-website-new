@@ -8,8 +8,6 @@ const { protect, authorize } = require('../middleware/authMiddleware');
 const router = express.Router();
 router.use(protect, authorize('admin'));
 
-// @desc Dashboard stats
-// @route GET /api/admin/stats
 router.get(
   '/stats',
   asyncHandler(async (req, res) => {
